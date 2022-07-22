@@ -36,10 +36,26 @@ Note: An example project demonstrating a complete integration with this SDK is f
 ```
 import BloodPressureSDK
 
-let sdk = BloodPressureSDK(key: {YOUR_SDK_KEY})
+let sdk = BloodPressureSDK(
+    key: {YOUR_SDK_KEY}, 
+    onCancel: { 
+        // Handle user cancellation...
+    },
+    onResult: { bp, error in 
+        guard error == nil else { 
+            // Handle error...
+            return
+        }
+        
+        // Handle blood pressure values...        
+        let systolic: Double = bp.systolic
+        let diastolic: Double = bp.diastolic
+    }
+        
+)
 ```
 
-#### Present the Blood Pressure Measurement View
+#### Present the SDK
 
 ##### UIKit
 ```
